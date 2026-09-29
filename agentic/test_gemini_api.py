@@ -11,9 +11,6 @@ client = genai.Client(
     api_key=os.getenv("GEMINI_API_KEY")
 )
 
-def get_today_schedule(day):
-    return function_call_schedule.get_today_schedule(day)
-
 #告訴gemini 使用get today schedule function 
 schedule_function = types.FunctionDeclaration(
     name = "get_today_schedule",
@@ -75,7 +72,7 @@ if response.function_calls:
 
     if function_call.name == "get_today_schedule":
         day = function_call.args["day"]
-        result = get_today_schedule(day)
+        result = function_call_schedule.get_today_schedule(day)
 
     elif function_call.name == "get_email":
         keyword = function_call.args["keyword"]
